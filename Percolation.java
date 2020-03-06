@@ -1,12 +1,13 @@
-import com.sun.tools.javac.comp.Check;
+import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
-import edu.princeton.cs.algs4.QuickUnionUF;
+
+import java.util.Arrays;
 
 public class Percolation {
     private boolean[][] grid;
     private WeightedQuickUnionUF unionFind ;
     private int openSites;
-    private int N;
+    private int n;
    /*
    * Initialize instance variables
 􏰐   * Connect the sites corresponding to first and last rows of the percolation system with the source
@@ -14,7 +15,6 @@ public class Percolation {
 􏰐    The N × N system with its top and bottom row sites connected to the source and sink sites respectively
    * */
     public Percolation(int n){
-        N = n;
         openSites = 0;
         grid = new boolean[n][n];
         for (int i=0; i<n; i++){
@@ -34,8 +34,7 @@ public class Percolation {
     public void open(int row, int col){
         /*
          Open the site (i, j) if it is not already open
-􏰐         Increment openSites by one
-􏰐         Check if any of the neighbors to the north,
+􏰐         Increment openSites by one Check if any of the neighbors to the north,
          east, west, and south of (i, j) is open,and if so,
          connect the site corresponding to (i, j) with the site corresponding to that neighbor
          */
@@ -88,18 +87,33 @@ public class Percolation {
 
     // does the system percolate?
     public boolean percolates(){
-        return unionFind.union(0, n*n+1);
+        // the system percolate if the sink is connected to the source......
+        return unionFind.connected(0, n*n+1);
     }
 
     private int encode(int i, int j){
         // encode the element from the grid data structure to the site and map it to the array
-        return (N * i) + (i + j) + 1;
+        return (n * i) + (i + j) + 1;
     }
 
     // test client (optional)
     public static void main(String[] args){
-        int n = 2;
-
-        unionFind.
+        int n = StdIn.readInt();
+        Percolation precolation = new Percolation(n);
+        int[] i;
+        int[] j = new int[0];
+        String[] inputArrays = new String[0];
+        while (!StdIn.isEmpty()){
+            // parse the input and read the int form
+            inputArrays  = StdIn.readAll().split(" ");
+        }
+        for (int k=0;k<inputArrays.length ; k++) {
+            if ( k % 2 == 0){
+                i[i.length - 1] = Integer.parseInt(inputArrays[k]);
+            }else
+            {
+                j[j.length - 1] = Integer.parseInt(inputArrays[k]);
+            }
+        }
     }
 }
